@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://repo.spring.io/snapshot"
+            url "http://repo.spring.io/milestone"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+processResources.destinationDir = compileJava.destinationDir
+compileJava.dependsOn processResources
+compileJava.options.compilerArgs = ['-Adoma.dao.subpackage=impl', '-Adoma.dao.suffix=Impl']
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.2.7.RELEASE'
+    
+    compile 'javax.json:javax.json-api:1.0'
+    compile 'org.glassfish:javax.json:1.0'
+
+    compile 'org.seasar.doma:doma:2.4.1'
+    compile 'org.xerial:sqlite-jdbc:3.8.11.2'
+    compile 'org.apache.commons:commons-dbcp2:2.0.1'
+    
+    compile 'javax.inject:javax.inject:1'
+    
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework:spring-test:4.1.8.RELEASE'
+}
