@@ -25,17 +25,17 @@ targetCompatibility = '1.8'
 repositories {
     mavenCentral()
     maven {
-        url 'http://repository.apache.org/snapshots/'
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
 }
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.2.7.RELEASE'
-    //compile 'org.seasar.doma.boot:doma-spring-boot-starter:1.0.0-SNAPSHOT'
+    compile 'org.seasar.doma.boot:doma-spring-boot-starter:1.0.0-SNAPSHOT'
     compile 'javax.json:javax.json-api:1.0'
     compile 'org.glassfish:javax.json:1.0'
 
-    compile 'org.seasar.doma:doma:2.5.1'
+    //compile 'org.seasar.doma:doma:2.5.1'
     compile 'org.xerial:sqlite-jdbc:3.8.11.2'
     compile 'org.apache.commons:commons-dbcp2:2.0.1'
     
