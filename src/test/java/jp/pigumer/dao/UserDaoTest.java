@@ -29,14 +29,26 @@ public class UserDaoTest {
                 Statement stmt = con.createStatement()) {
             stmt.execute("DROP TABLE USER");
             stmt.execute("CREATE TABLE USER (ID CHAR(13) PRIMARY KEY, NAME VARCHAR(32))");
-            stmt.execute("INSERT OR REPLACE INTO USER VALUES('1', 'TEST')");
         }
     }
 
     @Test
     public void test() throws Exception {
-        User user = sut.selectById("1");
+        User user = new User();
+        user.id = "1";
+        user.name = "FOO";
+        int ret = sut.insert(user);
+        assertThat(ret, is(1));
+        
+        user.name = "TEST";
+        ret = sut.update(user);
+        assertThat(ret, is(1));
+        
+        user = sut.selectById("1");
         assertThat(user.name, is("TEST"));
+        
+        ret = sut.delete(user);
+        assertThat(ret, is(1));
     }
 
 }
