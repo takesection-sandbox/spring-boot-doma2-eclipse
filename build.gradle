@@ -48,6 +48,8 @@ dependencies {
     
     compile 'javax.inject:javax.inject:1'
     
+    compile 'org.apache.velocity:velocity:1.7'
+
     testCompile 'junit:junit:4.12'
     testCompile 'org.springframework:spring-test'
 }
