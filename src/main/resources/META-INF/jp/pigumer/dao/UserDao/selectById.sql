@@ -1,4 +1,7 @@
--- id: String
+-- package: jp.pigumer.dao
+-- interface: UserDao
+-- annotation: @Select
+-- method: User selectById(String id)
 select
  id
 ,name

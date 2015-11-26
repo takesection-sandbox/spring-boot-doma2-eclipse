@@ -40,12 +40,27 @@ public class UserDaoTest {
         int ret = sut.insert(user);
         assertThat(ret, is(1));
         
+        user = new User();
+        user.id = "2";
+        user.name = "BAR";
+        ret = sut.insert(user);
+        assertThat(ret, is(1));
+        
+        user.id = "1";
         user.name = "TEST";
         ret = sut.update(user);
         assertThat(ret, is(1));
         
         user = sut.selectById("1");
         assertThat(user.name, is("TEST"));
+        
+        long len = sut.select(stream -> { 
+            return stream.map(u -> {
+                System.out.println(String.format("%s: %s", u.id, u.name));
+                return u;
+            }).count();
+        });
+        assertThat(len, is(2L));
         
         ret = sut.delete(user);
         assertThat(ret, is(1));
