@@ -26,9 +26,6 @@ buildscript {
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots/'
-    }
 }
 
 configurations.all {
@@ -38,7 +35,7 @@ configurations.all {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.boot:spring-boot-starter-jersey'
-    compile ('org.seasar.doma.boot:doma-spring-boot-starter:1.0.0-SNAPSHOT') { changing = true }
+    compile ('org.seasar.doma.boot:doma-spring-boot:1.0.0.RC1') { changing = true }
     
     compile 'org.glassfish.jersey.media:jersey-media-moxy:2.22.1'
     compile 'org.glassfish:javax.json:1.0.4'
