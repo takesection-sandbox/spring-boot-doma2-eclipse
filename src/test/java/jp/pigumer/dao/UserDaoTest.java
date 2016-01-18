@@ -2,14 +2,14 @@ package jp.pigumer.dao;
 
 import java.sql.Connection;
 import java.sql.Statement;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.sql.DataSource;
 import jp.pigumer.RootApplication;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.seasar.doma.jdbc.Config;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -18,16 +18,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserDaoTest {
 
     @Inject
-    private Config config;
-
+    DataSource dataSource;
+    
     @Inject
     private UserDao sut;
 
-    @PostConstruct
-    void afterPropertiesSet() throws Exception {
-        try (Connection con = config.getDataSource().getConnection();
+    @Before
+    public void afterPropertiesSet() throws Exception {
+        try (Connection con = dataSource.getConnection();
                 Statement stmt = con.createStatement()) {
-            stmt.execute("DROP TABLE USER");
+            stmt.execute("DROP TABLE IF EXISTS USER");
             stmt.execute("CREATE TABLE USER (ID CHAR(13) PRIMARY KEY, NAME VARCHAR(32))");
         }
     }
