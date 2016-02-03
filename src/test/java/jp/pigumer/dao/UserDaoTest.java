@@ -2,7 +2,7 @@ package jp.pigumer.dao;
 
 import java.sql.Connection;
 import java.sql.Statement;
-import javax.inject.Inject;
+import java.util.Optional;
 import javax.sql.DataSource;
 import jp.pigumer.RootApplication;
 import static org.hamcrest.CoreMatchers.is;
@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,10 +18,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringApplicationConfiguration(classes = RootApplication.class)
 public class UserDaoTest {
 
-    @Inject
+    @Autowired
     DataSource dataSource;
     
-    @Inject
+    @Autowired
     private UserDao sut;
 
     @Before

@@ -36,11 +36,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.seasar.doma.boot:doma-spring-boot-starter:1.0.0.RC2'
 
-    compile 'org.glassfish:javax.json:1.0.4'
-
     compile 'org.xerial:sqlite-jdbc:3.8.11.2'
-    
-    compile 'javax.inject:javax.inject:1'
     
     compile 'org.apache.velocity:velocity:1.7'
 
