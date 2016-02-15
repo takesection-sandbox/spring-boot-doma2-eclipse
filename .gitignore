@@ -3,3 +3,9 @@
 /.gradle/
 bower_components/
 database.db
+/.apt_generated/
+/bin/
+/.classpath
+/.project
+/.factorypath
+/.settings/

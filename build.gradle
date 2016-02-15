@@ -1,5 +1,15 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'spring-boot'
+apply plugin: 'eclipse'
 
 processResources.destinationDir = compileJava.destinationDir
 compileJava.dependsOn processResources
@@ -9,26 +19,33 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "http://repo.spring.io/snapshot"            
-        }
-        maven {
-            url "http://repo.spring.io/milestone"
-        }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.2.RELEASE")
-    }
+eclipse {
+	jdt {
+		file {
+			withProperties {properties ->
+				properties.setProperty('org.eclipse.jdt.core.compiler.processAnnotations', 'enabled')
+			}
+		}
+	}
+}
+
+eclipseJdt {
+	doFirst {
+		def factorypath = file('.factorypath')
+		def writer = new FileWriter(factorypath)
+		def xml = new groovy.xml.MarkupBuilder(writer)
+		xml.setDoubleQuotes(true)
+		xml.'factorypath'() {
+			def domaJar = configurations.compile.find {
+				it.name.startsWith('doma-2')
+			}
+			'factorypathentry'(kind: 'EXTJAR', id: domaJar, enabled: true, runInBatchMode: false)
+		}
+	}
 }
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
-    }
 }
 
 configurations.all {
@@ -37,9 +54,7 @@ configurations.all {
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    compile ('org.seasar.doma.boot:doma-spring-boot-starter:1.0.0-SNAPSHOT') {
-        changing = true
-    }
+    compile 'org.seasar.doma.boot:doma-spring-boot-starter:1.0.1'
 
     compile 'org.xerial:sqlite-jdbc:3.8.11.2'
     
