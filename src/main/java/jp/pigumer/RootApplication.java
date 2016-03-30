@@ -15,10 +15,15 @@
  */
 package jp.pigumer;
 
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import jp.pigumer.interceptor.LoggingAdvisor;
+import jp.pigumer.interceptor.LoggingInterceptor;
 
 @ComponentScan
 @EnableAutoConfiguration
@@ -27,5 +32,20 @@ public class RootApplication {
     
     public static void main(String[] args) {
         SpringApplication.run(RootApplication.class, args);
+    }
+    
+    @Bean
+    DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+    	return new DefaultAdvisorAutoProxyCreator();
+    }
+    
+    @Bean
+    LoggingAdvisor loggingAdvisor() {
+    	return new LoggingAdvisor();
+    }
+    
+    @Bean
+    LoggingInterceptor loggingInterceptor() {
+    	return new LoggingInterceptor();
     }
 }
