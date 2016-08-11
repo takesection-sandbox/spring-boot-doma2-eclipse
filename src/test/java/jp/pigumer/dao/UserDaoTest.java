@@ -27,10 +27,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RootApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserDaoTest {
 
     @Autowired
@@ -38,15 +39,6 @@ public class UserDaoTest {
     
     @Autowired
     private UserDao sut;
-
-    @Before
-    public void afterPropertiesSet() throws Exception {
-        try (Connection con = dataSource.getConnection();
-                Statement stmt = con.createStatement()) {
-            stmt.execute("DROP TABLE IF EXISTS USER");
-            stmt.execute("CREATE TABLE USER (ID CHAR(13) PRIMARY KEY, NAME VARCHAR(32))");
-        }
-    }
 
     @Test
     public void test() throws Exception {
