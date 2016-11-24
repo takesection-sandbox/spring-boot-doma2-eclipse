@@ -19,14 +19,10 @@ import jp.pigumer.interceptor.LoggingAdvisor;
 import jp.pigumer.interceptor.LoggingInterceptor;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan
-@EnableAutoConfiguration
-@SpringBootConfiguration
+@SpringBootApplication
 public class RootApplication {
     
     public static void main(String[] args) {

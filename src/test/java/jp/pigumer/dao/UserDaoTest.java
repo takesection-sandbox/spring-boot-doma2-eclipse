@@ -15,22 +15,18 @@
  */
 package jp.pigumer.dao;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.util.Optional;
-import javax.sql.DataSource;
-import jp.pigumer.RootApplication;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+import javax.sql.DataSource;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserDaoTest {
 
